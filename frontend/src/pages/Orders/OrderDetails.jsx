@@ -1,6 +1,7 @@
 import React from "react";
 import { Fragment } from "react";
 import dayjs from "dayjs";
+import { Link } from "react-router";
 
 const OrderDetails = ({ order }) => {
   return (
@@ -16,7 +17,7 @@ const OrderDetails = ({ order }) => {
               <div className="product-details">
                 <div className="product-name">{orderProduct.product.name}</div>
                 <div className="product-delivery-date">
-                  Arriving on:{" "}
+                  Arriving on:
                   {dayjs(orderProduct.estimatedDeliveryTimeMs).format("MMMM D")}
                 </div>
                 <div className="product-quantity">
@@ -32,11 +33,11 @@ const OrderDetails = ({ order }) => {
               </div>
 
               <div className="product-actions">
-                <a href="/tracking">
+                <Link to={`/tracking/${order.id}/${orderProduct.product.id}`}>
                   <button className="track-package-button button-secondary">
                     Track package
                   </button>
-                </a>
+                </Link>
               </div>
             </Fragment>
           );

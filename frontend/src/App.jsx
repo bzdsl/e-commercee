@@ -6,6 +6,8 @@ import Checkout from "./pages/Checkout/Checkout";
 import Orders from "./pages/Orders/Orders";
 import Tracking from "./pages/Tracking/Tracking";
 import { useEffect, useState } from "react";
+import Error from "./pages/Error";
+
 function App() {
   const [cart, setCart] = useState([]);
   useEffect(() => {
@@ -13,6 +15,7 @@ function App() {
       const response = await axios.get("/api/cart-items?expand=product");
       setCart(response.data);
     };
+
     fetchAppData();
   }, []);
   return (
@@ -20,7 +23,8 @@ function App() {
       <Route path="/" element={<HomePage cart={cart} />} />
       <Route path="/checkout" element={<Checkout cart={cart} />} />
       <Route path="/orders" element={<Orders cart={cart} />} />
-      <Route path="/tracking" element={<Tracking />} />
+      <Route path="/tracking/:orderId/:productId" element={<Tracking />} />
+      <Route path="*" element={<Error />} />
     </Routes>
   );
 }
