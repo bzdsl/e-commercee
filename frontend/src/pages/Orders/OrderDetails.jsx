@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import dayjs from "dayjs";
 import { Link } from "react-router";
 
-const OrderDetails = ({ order }) => {
+const OrderDetails = ({ order, addToCart }) => {
   return (
     <>
       <div className="order-details-grid">
@@ -17,7 +17,7 @@ const OrderDetails = ({ order }) => {
               <div className="product-details">
                 <div className="product-name">{orderProduct.product.name}</div>
                 <div className="product-delivery-date">
-                  Arriving on:
+                  Arriving on:{" "}
                   {dayjs(orderProduct.estimatedDeliveryTimeMs).format("MMMM D")}
                 </div>
                 <div className="product-quantity">
@@ -28,7 +28,12 @@ const OrderDetails = ({ order }) => {
                     className="buy-again-icon"
                     src="images/icons/buy-again.png"
                   />
-                  <span className="buy-again-message">Add to Cart</span>
+                  <span
+                    className="buy-again-message"
+                    onClick={() => addToCart(orderProduct.product.id)}
+                  >
+                    Add to Cart
+                  </span>
                 </button>
               </div>
 

@@ -20,6 +20,13 @@ const Checkout = ({ cart, loadCart }) => {
     };
     fetchCheckoutData();
   }, [cart]);
+  useEffect(() => {
+    const fetchPaymentSummary = async () => {
+      let response = await axios.get("/api/payment-summary");
+      setPaymentSummary(response.data);
+    };
+    fetchPaymentSummary();
+  }, [cart]);
   return (
     <>
       <title>Checkout</title>
@@ -35,7 +42,7 @@ const Checkout = ({ cart, loadCart }) => {
             loadCart={loadCart}
           />
 
-          <PaymentSummary paymentSummary={paymentSummary} />
+          <PaymentSummary paymentSummary={paymentSummary} loadCart={loadCart} />
         </div>
       </div>
     </>
